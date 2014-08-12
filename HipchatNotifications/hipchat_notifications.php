@@ -50,12 +50,8 @@ function getUserText($user)
 	       $wgWikiUrlEndingUserTalkPage, $wgWikiUrlEndingUserContributions;
 	
 	return sprintf(
-		"<b>%s</b> (%s | %s | %s | %s)",
-		"<a href='".$wgWikiUrl.$wgWikiUrlEnding.$wgWikiUrlEndingUserPage.$user."'>$user</a>",
-		"<a href='".$wgWikiUrl.$wgWikiUrlEnding.$wgWikiUrlEndingBlockUser.$user."'>block</a>",
-		"<a href='".$wgWikiUrl.$wgWikiUrlEnding.$wgWikiUrlEndingUserRights.$user."'>groups</a>",
-		"<a href='".$wgWikiUrl.$wgWikiUrlEnding.$wgWikiUrlEndingUserTalkPage.$user."'>talk</a>",
-		"<a href='".$wgWikiUrl.$wgWikiUrlEnding.$wgWikiUrlEndingUserContributions.$user."'>contribs</a>"
+		"<b>%s</b>",
+		"<a href='".$wgWikiUrl.$wgWikiUrlEnding.$wgWikiUrlEndingUserPage.$user."'>$user</a>"
 		);
 }
 
@@ -69,14 +65,8 @@ function getArticleText(WikiPage $article)
                $wgWikiUrlEndingDeleteArticle, $wgWikiUrlEndingHistory;
 
         return sprintf(
-                "<b>%s</b> (%s | %s | %s)",
-                "<a href='".$wgWikiUrl.$wgWikiUrlEnding.$article->getTitle()->getFullText()."'>".$article->getTitle()->getFullText()."</a>",
-                "<a href='".$wgWikiUrl.$wgWikiUrlEnding.$article->getTitle()->getFullText()."&".$wgWikiUrlEndingEditArticle."'>edit</a>",
-                "<a href='".$wgWikiUrl.$wgWikiUrlEnding.$article->getTitle()->getFullText()."&".$wgWikiUrlEndingDeleteArticle."'>delete</a>",
-                "<a href='".$wgWikiUrl.$wgWikiUrlEnding.$article->getTitle()->getFullText()."&".$wgWikiUrlEndingHistory."'>history</a>"/*,
-                "move",
-                "protect",
-                "watch"*/
+                "<b>%s</b>",
+                "<a href='".$wgWikiUrl.$wgWikiUrlEnding.$article->getTitle()->getFullText()."'>".$article->getTitle()->getFullText()."</a>"
                 );
 }
 
@@ -94,7 +84,7 @@ function article_saved(WikiPage $article, $user, $content, $summary, $isMinor, $
 		getUserText($user),
                 $isMinor == true ? "made minor edit to" : "edited",
                 getArticleText($article),
-		$summary == "" ? "" : "Summary: $summary");
+		$summary == "" ? "" : "\nSummary: $summary");
 	push_hipchat_notify($message, "yellow");
 	return true;
 }
@@ -112,7 +102,7 @@ function article_inserted(WikiPage $article, $user, $text, $summary, $isminor, $
 		"%s has created article %s %s",
 		getUserText($user),
 		getArticleText($article),
-		$summary == "" ? "" : "Summary: $summary");
+		$summary == "" ? "" : "\nSummary: $summary");
 	push_hipchat_notify($message, "green");
 	return true;
 }
