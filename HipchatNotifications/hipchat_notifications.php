@@ -84,7 +84,7 @@ function article_saved(WikiPage $article, $user, $content, $summary, $isMinor, $
 		getUserText($user),
                 $isMinor == true ? "made minor edit to" : "edited",
                 getArticleText($article),
-		$summary == "" ? "" : "<i>Summary</i>: $summary");
+		$summary == "" ? "" : "<i>Summary:</i> $summary");
 	push_hipchat_notify($message, "yellow");
 	return true;
 }
@@ -102,7 +102,7 @@ function article_inserted(WikiPage $article, $user, $text, $summary, $isminor, $
 		"%s has created article %s <br>%s",
 		getUserText($user),
 		getArticleText($article),
-		$summary == "" ? "" : "<i>Summary</i>: $summary");
+		$summary == "" ? "" : "<i>Summary:</i> $summary");
 	push_hipchat_notify($message, "green");
 	return true;
 }
@@ -114,7 +114,7 @@ function article_inserted(WikiPage $article, $user, $text, $summary, $isminor, $
 function article_deleted(WikiPage $article, $user, $reason, $id)
 {
 	$message = sprintf(
-		"%s has deleted article %s<br><i>Reason</i>: %s",
+		"%s has deleted article %s<br><i>Reason:</i> %s",
 		getUserText($user),
 		getArticleText($article),
 		$reason);
