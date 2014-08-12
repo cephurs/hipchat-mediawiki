@@ -39,9 +39,8 @@ MIT (http://en.wikipedia.org/wiki/MIT_License)
 
 3. Enjoy the notifications in your HipChat room!
 
-## Optional options
 
-### Hipchat options
+## Additional Hipchat options
 
 #### Trigger notification
 Whether or not this message should trigger a notification for people in the room (change the tab color, play a sound, etc). Each recipient's notification preferences are taken into account.
@@ -69,7 +68,8 @@ Options for what will be sent notifications of into HipChat. Set desired options
 	// File uploaded
 	$wgHipchatNotificationFileUpload = true;
 	
-#### URL endings
+## Additional MediaWiki settings
+### URL endings
 
 	$wgWikiUrlEndingUserRights          = "Special%3AUserRights&user=";
 	$wgWikiUrlEndingBlockUser           = "Special:Block/";
