@@ -80,11 +80,11 @@ function article_saved(WikiPage $article, $user, $content, $summary, $isMinor, $
         if ($article->getCount() == null || $article->getCount() < 1) return true;
 	
 	$message = sprintf(
-		"%s has %s article %s %s",
+		"%s has %s article %s <br>%s",
 		getUserText($user),
                 $isMinor == true ? "made minor edit to" : "edited",
                 getArticleText($article),
-		$summary == "" ? "" : "\nSummary: $summary");
+		$summary == "" ? "" : "<i>Summary</i>: $summary");
 	push_hipchat_notify($message, "yellow");
 	return true;
 }
@@ -99,10 +99,10 @@ function article_inserted(WikiPage $article, $user, $text, $summary, $isminor, $
         if ($article->getTitle()->getNsText() == "File") return true;
         
 	$message = sprintf(
-		"%s has created article %s %s",
+		"%s has created article %s <br>%s",
 		getUserText($user),
 		getArticleText($article),
-		$summary == "" ? "" : "\nSummary: $summary");
+		$summary == "" ? "" : "<i>Summary</i>: $summary");
 	push_hipchat_notify($message, "green");
 	return true;
 }
@@ -114,7 +114,7 @@ function article_inserted(WikiPage $article, $user, $text, $summary, $isminor, $
 function article_deleted(WikiPage $article, $user, $reason, $id)
 {
 	$message = sprintf(
-		"%s has deleted article %s Reason: %s",
+		"%s has deleted article %s<br><i>Reason</i>: %s",
 		getUserText($user),
 		getArticleText($article),
 		$reason);
@@ -146,7 +146,7 @@ function file_uploaded($image)
         global $wgWikiUrl, $wgWikiUrlEnding;
         
 	$message = sprintf(
-		"%s has uploaded file <a href=\"%s\">%s</a> (format: %s, size: %s MB, summary: %s)",
+		"%s has uploaded file <a href=\"%s\">%s</a><br>(format: %s, size: %s MB, summary: %s)",
 		getUserText($image->getLocalFile()->user_text),
 		$wgWikiUrl . $wgWikiUrlEnding . $image->getLocalFile()->getTitle(),
 		$image->getLocalFile()->getTitle(),
