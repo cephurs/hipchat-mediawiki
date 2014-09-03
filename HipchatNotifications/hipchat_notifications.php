@@ -155,8 +155,17 @@ function file_uploaded($image)
 		$image->getLocalFile()->getTitle(),
 		$image->getLocalFile()->mime,
 		round($image->getLocalFile()->size / 1024 / 1024, 3),
-                $image->getLocalFile()->description);
+        $image->getLocalFile()->description);
     */
+   
+	$message = sprintf(
+		"%s has uploaded file <a href=\"%s\">%s</a><br>(format: %s, size: %s MB, summary: n/a)",
+		getUserText($image->getLocalFile()->user_text),
+		$wgWikiUrl . $wgWikiUrlEnding . $image->getLocalFile()->getTitle(),
+		$image->getLocalFile()->getTitle(),
+		$image->getLocalFile()->mime,
+		round($image->getLocalFile()->size / 1024 / 1024, 3));
+
 	push_hipchat_notify($message, "green");
 	return true;
 }
