@@ -144,7 +144,10 @@ function new_user_account($user, $byEmail)
 function file_uploaded($image)
 {
         global $wgWikiUrl, $wgWikiUrlEnding;
-        
+    
+    $message = sprintf("File has been uploaded to the wiki");
+
+    /*    
 	$message = sprintf(
 		"%s has uploaded file <a href=\"%s\">%s</a><br>(format: %s, size: %s MB, summary: %s)",
 		getUserText($image->getLocalFile()->user_text),
@@ -153,6 +156,7 @@ function file_uploaded($image)
 		$image->getLocalFile()->mime,
 		round($image->getLocalFile()->size / 1024 / 1024, 3),
                 $image->getLocalFile()->description);
+    */
 	push_hipchat_notify($message, "green");
 	return true;
 }
